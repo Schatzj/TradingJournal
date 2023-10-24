@@ -1,0 +1,38 @@
+plugins {
+    id 'java-library'
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' //fat jar support https://imperceptiblethoughts.com/shadow/getting-started/#default-java-groovy-tasks
+  	id 'application'
+}
+
+mainClassName = 'tradingJournal.Application'
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+            srcDirs 'src/main/resources'
+        }
+    }
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'tradingJournal.Application'
+  }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+	
+	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+	
+}
+

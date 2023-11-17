@@ -42,9 +42,6 @@ import view.MainView;
 public class MainController {
 
 	private MainView view;
-//	private String path = GeneralUtility.getFullFileSavePath();
-	private String contextRootPath = GeneralUtility.getFirstPartOfSavePath(true);
-	private String pathToSpecificSave = GeneralUtility.getSecondPartOfSavePath(false);
 	private TagData tagData = new TagData();
 	
 	private static final Logger logger = LogManager.getLogger(MainController.class);
@@ -59,6 +56,8 @@ public class MainController {
 		frame.pack();
 		frame.setVisible(true);
 		
+		String contextRootPath = GeneralUtility.getFirstPartOfSavePath(true);
+		String pathToSpecificSave = GeneralUtility.getSecondPartOfSavePath(false);
 		loadEntriesForSpecificDay(contextRootPath + pathToSpecificSave);
 
 		addActionListners();
@@ -212,7 +211,10 @@ public class MainController {
 	
 	private void saveEntries() {
 		try {
+			String contextRootPath = GeneralUtility.getFirstPartOfSavePath(true);
+			String pathToSpecificSave = GeneralUtility.getSecondPartOfSavePath(false);
 			String path = contextRootPath + pathToSpecificSave;
+			
 			Path filePath = Paths.get(path);
 			Files.createDirectories(filePath);
 			int index = 1;
@@ -281,10 +283,13 @@ public class MainController {
 	}
 	
 	private void loadEntriesForSpecificDay(String path) {
+//		String contextRootPath = GeneralUtility.getFirstPartOfSavePath(true);
+//		String pathToSpecificSave = GeneralUtility.getSecondPartOfSavePath(false);
+		
 		view.clearTextAreas();
 		File directory = new File(path);
 		path = path.substring(path.indexOf(AppConstants.TOP_LEVEL_DIRECTORY_NAME) + AppConstants.TOP_LEVEL_DIRECTORY_NAME.length());
-		pathToSpecificSave = path;
+		String pathToSpecificSave = path;
 		
 		File[] files = directory.listFiles();
 		if(files != null) {

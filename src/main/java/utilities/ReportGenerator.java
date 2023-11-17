@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -91,15 +93,26 @@ public class ReportGenerator {
 		fileName = fileName.substring(0, fileName.length() -3) + "-resources";
 		File resources = new File(fileName);
 		File[] images = resources.listFiles();
+		
 		if(images != null) {
+			List<File> sortedListOfFiles = Arrays.asList(images);
+			sortedListOfFiles.sort(new Comparator<File>() {
+				@Override
+				public int compare(File o1, File o2) {
+					Date date1 = new Date(o1.lastModified());
+					Date date2 = new Date(o2.lastModified());
+					return (date1.compareTo(date2));
+				}						
+			});
+			
 			int index = 0; 
-			for(File image : images) {
+			for(File image : sortedListOfFiles) {
 				if(index == 0) {
 					builder.append("<table style='width:100%;'><tr>");
 				}else if(index % 2 == 0) {
 					builder.append("<tr/><tr>");
 				}
-				builder.append("<td style='border: 1px solid;'><img style='width:100%; display: block;' src='" + image.getAbsoluteFile() + "'><td/>");
+				builder.append("<td style='border: 1px solid;' title='" + image.getName() + "'><img style='width:100%; display: block;' src='" + image.getAbsoluteFile() + "'><td/>");
 				index++;
 			}
 			

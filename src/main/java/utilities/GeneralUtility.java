@@ -50,7 +50,7 @@ public class GeneralUtility {
 			path = File.separator;
 		}
 
-		path = path + File.separator + year + File.separator + month + File.separator + day;
+		path = path + year + File.separator + month + File.separator + day;
 		
 		return path;
 	}

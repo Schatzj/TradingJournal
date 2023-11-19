@@ -15,17 +15,7 @@ public class GeneralUtility {
 	}
 	
 	public static String getFullFileSavePath() {
-//		Preferences prefs = Preferences.userRoot().node(AppConstants.PREF_NODE);
-//		String saveLocation = prefs.get(AppConstants.PREF_SAVE_LOCATION, System.getProperty("user.home"));
-//		Calendar cal = Calendar.getInstance();
-//		cal.setTime(new Date(System.currentTimeMillis()));
-//		String year = cal.get(Calendar.YEAR) + "";
-//		String month = GeneralUtility.getNameOfMonth(cal);
-//		String day = cal.get(Calendar.DAY_OF_MONTH) + "";
-//		String path = saveLocation + File.separator + AppConstants.TOP_LEVEL_DIRECTORY_NAME + File.separator + year
-//				+ File.separator + month + File.separator + day;
-//		return path;
-		return getFirstPartOfSavePath(true) + getSecondPartOfSavePath(false);
+		return getFirstPartOfSavePath(true) + generateSecondPartOfSavePath(false);
 	}
 	
 	public static String getFirstPartOfSavePath(boolean includEndingFileSeperator) {
@@ -38,7 +28,7 @@ public class GeneralUtility {
 		return path;
 	}
 	
-	public static String getSecondPartOfSavePath(boolean includStartingFileSeperator) {
+	public static String generateSecondPartOfSavePath(boolean includStartingFileSeperator) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date(System.currentTimeMillis()));
 		String year = cal.get(Calendar.YEAR) + "";

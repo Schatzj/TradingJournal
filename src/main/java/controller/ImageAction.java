@@ -38,7 +38,7 @@ public class ImageAction extends AbstractAction{
 	private int index;
 	private MainView view;
 	private String contextRootPath = GeneralUtility.getFirstPartOfSavePath(true);
-	private String pathToSpecificSave = GeneralUtility.getSecondPartOfSavePath(false);
+	private String pathToSpecificSave = GeneralUtility.generateSecondPartOfSavePath(false);
 	
 	public ImageAction() {}
 
@@ -50,14 +50,17 @@ public class ImageAction extends AbstractAction{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+//		String targetDestDir = contextRootPath + pathToSpecificSave;
+		Preferences prefs = Preferences.userRoot().node(AppConstants.PREF_NODE);
+		pathToSpecificSave = prefs.get(AppConstants.PATH_TO_CURRENT_ENTRIES, pathToSpecificSave);
 		String targetDestDir = contextRootPath + pathToSpecificSave;
+		
 		if(e.getSource().getClass() == JButton.class) {
 			JButton button = (JButton)e.getSource();
 			long currentTime = System.currentTimeMillis();
 			long maxAge = getMaxAge(currentTime);
 			
 			if(button.getName().equalsIgnoreCase(AppConstants.SWEEP_BUTTON)) {
-				Preferences prefs = Preferences.userRoot().node(AppConstants.PREF_NODE);
 				String listOfPaths = prefs.get(AppConstants.PREF_SWEEP_LOCATIONS, "");
 				listOfPaths = listOfPaths.replaceAll(System.lineSeparator(), ";");
 				

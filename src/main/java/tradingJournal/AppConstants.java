@@ -10,6 +10,8 @@ public class AppConstants {
 	public static String PREF_FILE_TYPES = "FileTypes";
 	public static String TOP_LEVEL_DIRECTORY_NAME = "Trading-Journal";
 	
+	public static String PATH_TO_CURRENT_ENTRIES = "Working-entry-path";
+	
 	public static String TAG_FILENAME = "tags";
 	
 	public static String FILE_MENU = "File";
